@@ -1,5 +1,5 @@
-﻿# Multifunctional Mainboard to Observe and Manipulate Organisms MOMO
-# alias MAPRDL
+﻿# Multifunctional Mainboard to Observe and Manipulate Organisms (MOMO)
+alias MAPRDL
 
 Platform for Animal Observation and Manipulation 
 
@@ -26,10 +26,10 @@ as well as in laboratory settings
     awake: 12V@12mA
 
 
-The APDRL features EFM32 ...the world´s most energy friendly microcontrollers
-
-ARM Cortex-M3 EFM32G230F128
-
 ![My image](https://github.com/peterloes/MOMO/blob/master/Getting_Started_Tutorial/1_Feeder.jpg)
 
 Bird Feeder Application
+
+The MOMO features EFM32 ...the world´s most energy friendly microcontrollers
+
+ARM Cortex-M3 EFM32G230F128
