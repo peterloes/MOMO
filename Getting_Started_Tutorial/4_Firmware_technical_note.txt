@@ -1,0 +1,27 @@
+MOMO (Multifunctional Mainboard to Observe and Manipulate Organisms) 
+is an application to automate the recording and manipulation of animal behavior.
+
+This application consists of the following modules:
+ - main.c - Initialization code and main execution loop.
+ - DMA_ControlBlock.c - Control structures for the DMA channels.
+ - Control.c - Sequence Control module.
+ - CfgData.c - Handling of configuration data.
+ - ExtInt.c - External interrupt handler.
+ - AlarmClock.c - Alarm clock and timers facility.
+ - DCF77.c - DCF77 Atomic Clock Decoder
+ - clock.c - An implementation of the POSIX time() function.
+ - LightBarrier.c - Interrupt logic for the two light barriers,
+   enables the RFID reader.
+ - RFID.c - RFID reader to receive transponder IDs.
+ - BatteryMon.c - Battery monitor, periodically reads the state of the
+   battery via the SMBus.
+ - LEUART.c - The Low-Energy UART can be used as monitoring and debugging
+   connection to a host computer.
+ - microsd.c - Together with the files "diskio.c" and "ff.c", this module
+   provides an implementation of a FAT file system on the @ref ss8.
+ - Logging.c - Logging facility to send messages to the LEUART and store
+   them into a file on the SD-Card.
+ - PowerFail.c - Handler to switch off all loads in case of Power Fail.
+ - The list of Transponder IDs is no more kept in memory, instead
+   the configuration file is read for each compare.  This allows
+   a higher number of IDs to be used (no memory limitations).
