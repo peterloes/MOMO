@@ -14,7 +14,7 @@ as well as in laboratory settings
 -	Data-transfer to external devices, such as personal computers
  
 
-![My image](https://github.com/peterloes/RFID-MS/blob/master/1_Getting%20Started%20Tutorial/2_Electronic_board.jpg)
+![My image](https://github.com/peterloes/MOMO/blob/master/Getting_Started_Tutorial/2_Electronic_board.jpg)
 
 - Time Synchronization onces a day
 - Application Current Control twice a day
@@ -30,6 +30,6 @@ The APDRL features EFM32 ...the world´s most energy friendly microcontrollers
 
 ARM Cortex-M3 EFM32G230F128
 
-![My image](https://github.com/peterloes/RFID-MS/blob/master/1_Getting%20Started%20Tutorial/1_SNB.JPG)
+![My image](https://github.com/peterloes/MOMO/blob/master/Getting_Started_Tutorial/1_Feeder.jpg)
 
 Bird Feeder Application
