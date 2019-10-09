@@ -1,0 +1,82 @@
+# Configuration file for MAPRDL
+#
+# Revision History
+# 2017-01-22,rage   Initial version
+
+# Configuration Variables in config.txt:
+
+# ON_TIME, OFF_TIME [hour:min]
+#   These variables determine the on and off time of the feeder.  When it
+#   is in the off state, the feeder is closed and light barriers are ignored.
+
+# LB_FILTER_DURATION [s]
+#   Light barrier (LB) filter duration in seconds.  The LB may change its
+#   state several times during a bird is picking food.  To prevent the
+#   underlying logic from assuming each time "a new bird", this filter has
+#   been implemented.  The duration starts whenever the LB turns to inactive
+#   state, i.e. no object is detected any more.  When the LB returns active
+#   before this time is over, this event will be ignored.  Timing diagram:
+#                         ____        __
+#     LB activity  :  ___/    \______/  \______________________________
+#                         ____________________________
+#     Filter Output:  ___/              |------t------\________________
+
+# RFID_PWR_OFF_TIMEOUT [s]
+#   Duration in seconds after which the RFID reader is powered-off.  It is
+#   measured from the time when the light barrier filter gets inactive.
+
+# RFID_DETECT_TIMEOUT [s]
+#   Duration in seconds measured from the trigger, i.e. when the light barrier
+#   filter output gets active or a transponder has been read already.
+#   Within this period, the system tries to identify the bird by its
+#   transponder ID.  If no transponder is detected, the bird is treated
+#   as UNKNOWN and the feeder usually will be closed.
+
+# KEEP_OPEN [s]
+#   Default duration in seconds how long the shutter keeps open.  Letter "A"
+#   means always - use this if the feeder should be permanently left open.
+
+# KEEP_CLOSED [s]
+#   Default duration in seconds how long the shutter keeps closed.  Letter "A"
+#   means always - use this if the feeder should be permanently kept closed.
+
+# CAM1_DURATION [s]
+#   Duration in seconds, CAM1 is still powered after light barrier filter
+#   output has been gone inactive.  Be aware, the camera itself may be
+#   configured to have an additional time before powering off.
+
+# ID
+#   Transponder ID and optional parameters.
+#
+#       ID = 0123456789012345:{KEEP_OPEN}:{KEEP_CLOSED}:{CAM1_DURATION}
+#
+#   Fields may be left empty to use default values, for example
+#   ID = 9E1CE7D001AF0001:::120 specifies 120s (2min) for camera 1 duration,
+#   but uses the default settings for KEEP_OPEN and KEEP_CLOSED.
+#   There are two special IDs: "ANY" means there was a transponder detected,
+#   but its ID is not listed in this file.  "UNKNOWN" means that NO transponder
+#   could be detected within RFID_DETECT_TIMEOUT.
+
+    # Operating time of the feeder
+ON_TIME	 = 03:35
+OFF_TIME = 22:40
+
+    # Light barrier filter
+LB_FILTER_DURATION   = 10
+
+    # RFID settings
+RFID_PWR_OFF_TIMEOUT = 360	# 6min
+RFID_DETECT_TIMEOUT  = 15
+
+    # Shutter open and closed durations (default)
+KEEP_OPEN   = 60
+KEEP_CLOSED = 120
+
+    # Camera settings (default)
+CAM1_DURATION = 15		# keep CAM1 on for 15s after LB is inactive
+
+    # ID-specific configurations
+ID = 108196A801AF0001:180	# keep feeder 3min open
+ID = 9E1CE7D001AF0001:A		# keep feeder always open
+ID = ANY:120:240:360		# for any other ID keep feeder 2min open, 4min closed
+ID = UNKNOWN:0:600		# close feeder immediately for unknown fellows, keep 10min closed
