@@ -10,8 +10,8 @@ as well as in laboratory settings
 -	Low power consumption and specific data collection lead to long lasting collection periods
 -	Applicable world-wide due to its compatibility with different types of radio clock receivers 
 -	High observation quality through low disturbance to the animals
--       Supports a broad range of technical applications like e.g. traps, gates, feeders, lights, cameras
--	Supports data-transfer to external devices, such as personal computers
+- Supports a broad range of technical applications like e.g. traps, gates, feeders, lights, cameras
+- Supports data-transfer to external devices, such as personal computers
  
 
 ![My image](https://github.com/peterloes/MOMO/blob/master/Getting_Started_Tutorial/2_Electronic_board.jpg)
