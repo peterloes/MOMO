@@ -9,8 +9,8 @@ as well as in laboratory settings
 -	Compatible with different RFID systems and triggers
 -	Low power consumption and specific data collection lead to long lasting collection periods
 -	Applicable world-wide due to its compatibility with different types of radio clock receivers 
--	High observation quality through low disturbance of the animals
-- Supports a broad range of technical applications like e.g. traps, gates, feeders, lights, cameras
+-	High observation quality through low disturbance to the animals
+-       Supports a broad range of technical applications like e.g. traps, gates, feeders, lights, cameras
 -	Supports data-transfer to external devices, such as personal computers
  
 
@@ -21,9 +21,7 @@ as well as in laboratory settings
 - Forecast for Battery-Change implemented
 - Energy Bypass so that Date and Time are maintained even when changing battery
 - Hyperterminal Output to get real-time data in the field
-- Low-Power Device: 
-    sleep: 12V@220µA with Light_Barrier Board
-    awake: 12V@12mA
+- Low-Power Device:sleep: 12V@220µA with Light_Barrier awake: 12V@12mA
 
 
 ![My image](https://github.com/peterloes/MOMO/blob/master/Getting_Started_Tutorial/1_Feeder.jpg)
