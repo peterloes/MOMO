@@ -1,6 +1,8 @@
 ﻿# Multifunctional Mainboard to Observe and Manipulate Organisms (MOMO)
 alias MAPRDL
 
+Authors: Peter Loës, Peter Skripsky, and Bart Kempenaers (2019)
+
 Platform for Animal Observation and Manipulation 
 
 An efficient system to monitor and control animal behaviour in wildlife
