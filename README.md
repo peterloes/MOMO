@@ -8,6 +8,7 @@ Platform for Animal Observation and Manipulation
 An efficient system to monitor and control animal behaviour in wildlife
 as well as in laboratory settings
 
+- Manipulate over thousands identities
 -	Compatible with different RFID systems and triggers
 -	Low power consumption and specific data collection lead to long lasting collection periods
 -	Applicable world-wide due to its compatibility with different types of radio clock receivers 
