@@ -30,7 +30,7 @@ as well as in laboratory settings
 
 Bird Feeder Application
 
-Optional components:
+Optional components: 
 
 https://github.com/peterloes/Light_Barrier
 
