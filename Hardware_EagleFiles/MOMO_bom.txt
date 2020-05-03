@@ -1,17 +1,17 @@
-Partlist exported from C:/MPIO/TECHNIK/HARDWARE/EAGLE_FILES/Serenity_2015/MOMO_2_elatec.sch at 5/22/2017 10:02:44 AM
+Partlist exported at 5/22/2017 10:02:44 AM
 
 Part  Value                 Device                  Package                Description                                                    MF MPN     OC_FARNELL OC_NEWARK PACKAGE  SUPPLIER         
-C1    100µF/25V             CPOL-EUE                PANASONIC_E            POLARIZED CAPACITOR, European symbol                                                                                     
-C2    10µF/25V              C-EUC1206               C1206                  CAPACITOR, European symbol                                                                                               
-C3    22µF/10V              C-EUC0603               C0603                  CAPACITOR, European symbol                                                                                               
+C1    100ÂµF/25V             CPOL-EUE                PANASONIC_E            POLARIZED CAPACITOR, European symbol                                                                                     
+C2    10ÂµF/25V              C-EUC1206               C1206                  CAPACITOR, European symbol                                                                                               
+C3    22ÂµF/10V              C-EUC0603               C0603                  CAPACITOR, European symbol                                                                                               
 C4    EECS0HD 224;Panasonic GOLDCAPSPK-V            GOLDCAPSPK-V                                                                                                                                    
-C5    100µF/25V             CPOL-EUE                PANASONIC_E            POLARIZED CAPACITOR, European symbol                                                                                     
-C6    100µF/25V             CPOL-EUE                PANASONIC_E            POLARIZED CAPACITOR, European symbol                                                                                     
-C7    100µF/25V             CPOL-EUE                PANASONIC_E            POLARIZED CAPACITOR, European symbol                                                                                     
+C5    100ÂµF/25V             CPOL-EUE                PANASONIC_E            POLARIZED CAPACITOR, European symbol                                                                                     
+C6    100ÂµF/25V             CPOL-EUE                PANASONIC_E            POLARIZED CAPACITOR, European symbol                                                                                     
+C7    100ÂµF/25V             CPOL-EUE                PANASONIC_E            POLARIZED CAPACITOR, European symbol                                                                                     
 C8    100nF/16V             C-EUC0805               C0805                  CAPACITOR, European symbol                                                                                               
 C9    100nF/16V             C-EUC0805               C0805                  CAPACITOR, European symbol                                                                                               
 C10   100nF/16V             C-EUC0805               C0805                  CAPACITOR, European symbol                                                                                               
-C11   10µ/25V               C-EUC1206               C1206                  CAPACITOR, European symbol                                                                                               
+C11   10Âµ/25V               C-EUC1206               C1206                  CAPACITOR, European symbol                                                                                               
 C12   100n                  C_SMD0805               0805                                                                                                                                            
 C13   1u                    C_SMD0805               0805                                                                                                                                            
 C14   12p                   C_SMD0805               0805                                                                                                                                            
@@ -21,20 +21,20 @@ C17   100n                  C_SMD0805               0805
 C18   100n                  C_SMD0805               0805                                                                                                                                            
 C19   12p                   C_SMD0805               0805                                                                                                                                            
 C20   18p                   C_SMD0805               0805                                                                                                                                            
-C21   10µ                   C_SMD0805               0805                                                                                                                                            
+C21   10Âµ                   C_SMD0805               0805                                                                                                                                            
 C22   100n                  C_SMD0805               0805                                                                                                                                            
 C23   100n                  C_SMD0805               0805                                                                                                                                            
 C24   100n                  C_SMD0805               0805                                                                                                                                            
 C25   100n                  C_SMD0805               0805                                                                                                                                            
 C26   100n                  C_SMD0805               0805                                                                                                                                            
-C27   10µ                   C_SMD0805               0805                                                                                                                                            
+C27   10Âµ                   C_SMD0805               0805                                                                                                                                            
 C28   100nF                 C-EUC0603               C0603                  CAPACITOR, European symbol                                                                                               
 C29   100nF                 C-EUC0603               C0603                  CAPACITOR, European symbol                                                                                               
 C30   100nF                 C-EUC0603               C0603                  CAPACITOR, European symbol                                                                                               
 C31   100nF                 C-EUC0603               C0603                  CAPACITOR, European symbol                                                                                               
 C32   100nF                 C-EUC0603               C0603                  CAPACITOR, European symbol                                                                                               
-C33   4.7µF                 C-EUC1210               C1210                  CAPACITOR, European symbol                                                                                               
-C34   4.7µF                 C-EUC1210               C1210                  CAPACITOR, European symbol                                                                                               
+C33   4.7ÂµF                 C-EUC1210               C1210                  CAPACITOR, European symbol                                                                                               
+C34   4.7ÂµF                 C-EUC1210               C1210                  CAPACITOR, European symbol                                                                                               
 C35   n.b.                  C-EUC1210               C1210                  CAPACITOR, European symbol                                                                                               
 C36   n.b.                  C-EUC1210               C1210                  CAPACITOR, European symbol                                                                                               
 C37   10nF                  C-EUC0603               C0603                  CAPACITOR, European symbol                                                                                               
@@ -49,10 +49,10 @@ C45   24pF                  C-EUC0603               C0603                  CAPAC
 C46   24pF                  C-EUC0603               C0603                  CAPACITOR, European symbol                                                                                               
 C47    n.b.                 C-EUC0603               C0603                  CAPACITOR, European symbol                                                                                               
 C48    n.b                  C-EUC0603               C0603                  CAPACITOR, European symbol                                                                                               
-C49   22µF                  C-EUC1210               C1210                  CAPACITOR, European symbol                                                                                               
-C50   22µF                  C-EUC1210               C1210                  CAPACITOR, European symbol                                                                                               
-C51   22µF                  C-EUC1210               C1210                  CAPACITOR, European symbol                                                                                               
-C52   22µF                  C-EUC1210               C1210                  CAPACITOR, European symbol                                                                                               
+C49   22ÂµF                  C-EUC1210               C1210                  CAPACITOR, European symbol                                                                                               
+C50   22ÂµF                  C-EUC1210               C1210                  CAPACITOR, European symbol                                                                                               
+C51   22ÂµF                  C-EUC1210               C1210                  CAPACITOR, European symbol                                                                                               
+C52   22ÂµF                  C-EUC1210               C1210                  CAPACITOR, European symbol                                                                                               
 C53   n.b.                  C-EUC1210               C1210                  CAPACITOR, European symbol                                                                                               
 C54   n.b.                  C-EUC1210               C1210                  CAPACITOR, European symbol                                                                                               
 C55   100nF                 C-EUC0603               C0603                  CAPACITOR, European symbol                                                                                               
@@ -75,7 +75,7 @@ IC2   EFM32G230F128         EFM32G230F128           QFN64                  EFM32
 IC3   TPS54240DGQR          TPS54240DGQR            S-PDSO-G10                                                                                                                                      
 IC4   TPS54240DGQR          TPS54240DGQR            S-PDSO-G10                                                                                                                                      
 J1    LUMBERG1502_01        LUMBERG1502_01          LUMBERG1502_01                                                                                                                                  
-L1    LPS3008/22µH          LPS3008                 LPS3008                                                                                                                                         
+L1    LPS3008/22ÂµH          LPS3008                 LPS3008                                                                                                                                         
 L2    BLM21B102S            WE-CBF-7427920_0805     0805                   SMD EMI Suppression Ferrite Beads WE-CBF                          7427920 1635707    08P2358   IND-0805 Wuerth Elektronik
 L3    PIS4728-220M-04       DR127                   DR127                  High Power Density, High Efficiency, Shielded Inductors                                                                  
 L4    PIS4728-220M-04       DR127                   DR127                  High Power Density, High Efficiency, Shielded Inductors                                                                  
