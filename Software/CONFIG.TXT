@@ -1,4 +1,4 @@
-# Configuration file for MAPRDL
+# Configuration file for MAPRDL COPY FILE ON SD CARD
 #
 # Revision History
 # 2017-01-22,rage   Initial version
