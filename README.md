@@ -36,6 +36,10 @@ Raw data:
 
 https://github.com/peterloes/MOMO/blob/master/Getting_Started_Tutorial/6_rawdata_BOX1005.TXT
 
+Configuration data:
+
+https://github.com/peterloes/MOMO/blob/master/Software/CONFIG.TXT
+
 Optional components: 
 
 https://github.com/peterloes/Light_Barrier
