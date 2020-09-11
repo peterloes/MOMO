@@ -32,6 +32,10 @@ Bird Feeder Application
 
 https://github.com/peterloes/MOMO/blob/master/Getting_Started_Tutorial/1_poster_overview_3.pdf
 
+Rawdata:
+
+https://github.com/peterloes/MOMO/blob/master/Getting_Started_Tutorial/6_rawdata_BOX1005.TXT
+
 Optional components: 
 
 https://github.com/peterloes/Light_Barrier
