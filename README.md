@@ -32,11 +32,11 @@ Bird Feeder Application
 
 https://github.com/peterloes/MOMO/blob/master/Getting_Started_Tutorial/1_poster_overview_3.pdf
 
-Raw data:
+Raw data on SD Card:
 
 https://github.com/peterloes/MOMO/blob/master/Getting_Started_Tutorial/6_rawdata_BOX1005.TXT
 
-Configuration data:
+Configuration data on SD Card:
 
 https://github.com/peterloes/MOMO/blob/master/Software/CONFIG.TXT
 
