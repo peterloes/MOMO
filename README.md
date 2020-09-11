@@ -30,7 +30,7 @@ as well as in laboratory settings
 
 Bird Feeder Application
 
-https://github.com/peterloes/MOMO/blob/master/Getting_Started_Tutorial/1_poster_overview_2.pdf
+https://github.com/peterloes/MOMO/blob/master/Getting_Started_Tutorial/1_poster_overview_3.pdf
 
 Optional components: 
 
