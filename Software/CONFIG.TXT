@@ -77,10 +77,7 @@ CAM_DURATION = 15		# keep CAM on for 15s after LB is inactive
 
     # ID-specific configurations
 
-ID = 108196A801AF0001:180       # keep feeder 3min open
-
+ID = 108196A801AF0001:180   # keep feeder 3min open
 ID = 9E1CE7D001AF0001:A		# keep feeder always open
-
 ID = ANY:120:240:360		# for any other ID keep feeder 2min open, 4min closed
-
-ID = UNKNOWN:0:600		# close feeder immediately for unknown fellows, keep 10min closed
+ID = UNKNOWN:0:600		    # close feeder immediately for unknown fellows, keep 10min closed
