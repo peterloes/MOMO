@@ -2,12 +2,14 @@
  * @file
  * @brief	Power Fail Logic
  * @author	Ralf Gerhauser
- * @version	2017-01-31
+ * @version	2020-05-12
  *
  * This module handles all actions required in case of a power-fail.
  *
  ****************************************************************************//*
 Revision History:
+2020-05-12,rage	Call CheckAlarmTimes() after Power Fail has disappeared.
+2020-01-22,rage	PowerFailCheck: call BatteryChangeTrigger() when power good.
 2017-01-31,rage	Initial version.
 */
 
@@ -17,6 +19,8 @@ Revision History:
 #include "em_cmu.h"
 #include "ExtInt.h"
 #include "PowerFail.h"
+#include "BatteryMon.h"
+#include "AlarmClock.h"		// import CheckAlarmTimes()
 #include "Logging.h"
 
 /*================================ Local Data ================================*/
@@ -96,6 +100,12 @@ const POWER_FAIL_FCT *pFct;
 
 	    /* Replay external interrupts to consider new power state */
 	    ExtIntReplay();
+
+	    /* We assume the Battery Pack has been changed */
+	    BatteryChangeTrigger();
+
+	    /* See if devices must be switched on at this time */
+	    CheckAlarmTimes();
 	}
 
 	return false;

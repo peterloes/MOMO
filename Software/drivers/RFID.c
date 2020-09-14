@@ -43,6 +43,11 @@
  *
  ****************************************************************************//*
 Revision History:
+2020-06-03,rage	- BugFix: Corrected decoding of SR transponder ID.
+2019-02-10,rage	- RFID_Decode: Put generic parts at the end of the routine,
+		  added debug code to print the received data bytes.
+2018-12-06,rage	- Changed decoding for LR reader to be compatible with the RFID
+		  handheld reader.
 2018-11-12,rage	- Set interrupt priority for UARTs.
 2017-06-20,rage	- Separated USART settings from RFID settings to be able to
 		  support different types of RFID readers.
@@ -549,16 +554,16 @@ static void RFID_DetectTimeout(TIM_HDL hdl)
 static void RFID_Decode(int devNum, uint32_t byte)
 {
 const  uint8_t	 v[5] = { 0x0E, 0x00, 0x11, 0x00, 0x05};
-const  uint8_t	 InvNibble[16] = { 0x0, 0x8, 0x4, 0xC, 0x2, 0xA, 0x6, 0xE,
-				   0x1, 0x9, 0x5, 0xD, 0x3, 0xB, 0x7, 0xF };
 const  char	 HexChar[16] = {'0', '1', '2', '3', '4', '5', '6', '7',
  				'8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 static uint8_t	 xorsum[NUM_RFID_READER];  // checksum variables
 static uint8_t	 w[NUM_RFID_READER][14];   // buffer for storing received bytes
 static uint16_t	 crc[NUM_RFID_READER];     // checksum variables
 uint16_t	 val;
-char	 newTransponder[18];
-int	 i;
+bool	 flgRecvdID = false;
+char	 newTransponder[50]; // also used to store data in case of error message
+int	 offs = 0;	// byte offset within the received transponder message
+int	 i, pos;
 
 
     /* parameter check */
@@ -577,6 +582,10 @@ int	 i;
 
     /* store current byte into receive buffer */
     byte &= 0xFF;		// only bit 7~0 contains the data
+    DBG_PUTC('[');DBG_PUTC(HexChar[(byte >> 4) & 0xF]);
+    DBG_PUTC(HexChar[byte & 0xF]);DBG_PUTC(']');
+    
+    
     w[devNum][l_State[devNum]] = (uint8_t)byte;
 
     /* handle data according to the respective RFID reader type */
@@ -615,37 +624,28 @@ int	 i;
 		break;			// break!
 
 	    case 13:
-		if (w[devNum][13] == xorsum[devNum])	//Checksumme vergleichen!
+		if (w[devNum][13] != xorsum[devNum])	//handle ERROR case
 		{
-		    for (i=0; i<8; i++)	// copy w to trans and convert to ASCII HEX
+		    /* Print Hex Codes of the wrong message */
+		    pos = 0;
+                    for (i=0; i<=13; i++)	
 		    {
-			newTransponder[2*i]   = HexChar[(w[devNum][12-i]>>4) & 0x0F];
-			newTransponder[2*i+1] = HexChar[(w[devNum][12-i])    & 0x0F];
+			newTransponder[pos++] = ' ';
+			newTransponder[pos++] = HexChar[(w[devNum][i] >> 4) & 0x0F];
+			newTransponder[pos++] = HexChar[(w[devNum][i]) & 0x0F];
 		    }
-		    newTransponder[16] = '\0';
-
-		    /* (re-)start timer for RFID timeout detection */
-		    if (l_flgObjectPresent  &&  l_hdlRFID_DetectTimeout != NONE)
-			sTimerStart (l_hdlRFID_DetectTimeout, g_RFID_DetectTimeout);
-
-		    /* see if a new run - or Transponder Number has changed */
-		    if (l_flgNewRun  ||  strcmp (newTransponder, g_Transponder))
-		    {
-			l_flgNewRun = false;	// clear flag
-
-			/* store new Transponder Number */
-			strcpy (g_Transponder, newTransponder);
-
-#if defined(LOGGING)  &&  ! defined (MOD_CONTROL_EXISTS)
-			/* Generate Log Message */
-			Log ("Transponder: %s", g_Transponder);
-#endif
-			/* Set flag to notify new transponder ID */
-			l_flgNewID = true;
-		    }
+		    newTransponder[pos] = '\0';
+		    LogError("RFID_Decode(): recv.XOR=0x%02X, calc.XOR=0x%02X,"
+			     " data is%s", w[devNum][13], xorsum, newTransponder);
+                    
+                    l_State[devNum] = 0;	// restart state machine
+                    break;                             
 		}
-		/* no break */
-	    default:
+                flgRecvdID = true;	// ID has been received - set flag
+		offs = 12;		// byte offset within the message
+		break;
+	
+            default:
 		l_State[devNum] = 0;	// restart state machine
 		break;
 	    }
@@ -656,7 +656,7 @@ int	 i;
 	    {
 	    case 0:	// expect prefix 0x54 ('T')
 		if (byte != 0x54)
-		{
+		{       // (there may be leading zeros)
 		    l_State[devNum] = 0; // restart state machine
 		    break;		// break!
 		}
@@ -689,38 +689,24 @@ int	 i;
 		val = (w[devNum][10] << 8) | w[devNum][9];
 		if (val != crc[devNum])
 		{
-		    LogError("RFID_Decode(%d): recv.CRC=0x%04X, calc.CRC=0x%04X",
-			     devNum, val, crc[devNum]);
+		    /* Print Hex Codes of the wrong message */
+		    pos = 0;
+		    for (i=0; i <= 10; i++)
+		    {
+			newTransponder[pos++] = ' ';
+			newTransponder[pos++] = HexChar[(w[devNum][i] >> 4) & 0x0F];
+			newTransponder[pos++] = HexChar[(w[devNum][i]) & 0x0F];
+		    }
+		    newTransponder[pos] = '\0';
+		    LogError("RFID_Decode(): recv.CRC=0x%04X, calc.CRC=0x%04X,"
+			     " data is%s", val, crc, newTransponder);
 		    l_State[devNum] = 0;	// restart state machine
 		    break;
 		}
-		for (i=0; i<8; i++)	// copy w to trans and convert to ASCII HEX
-		{
-		    newTransponder[2*i]   = HexChar[InvNibble[(w[devNum][1+i]) & 0x0F]];
-		    newTransponder[2*i+1] = HexChar[InvNibble[(w[devNum][1+i]>>4) & 0x0F]];
-		}
-		newTransponder[16] = '\0';
+       		flgRecvdID = true;	// ID has been received - set flag
+		offs = 8;		// byte offset within the message
+		break;
 
-		/* (re-)start timer for RFID timeout detection */
-		if (l_flgObjectPresent  &&  l_hdlRFID_DetectTimeout != NONE)
-		    sTimerStart (l_hdlRFID_DetectTimeout, g_RFID_DetectTimeout);
-
-		/* see if a new run - or Transponder Number has changed */
-		if (l_flgNewRun  ||  strcmp (newTransponder, g_Transponder))
-		{
-		    l_flgNewRun = false;	// clear flag
-
-		    /* store new Transponder Number */
-		    strcpy (g_Transponder, newTransponder);
-
-#if defined(LOGGING)  &&  ! defined (MOD_CONTROL_EXISTS)
-		    /* Generate Log Message */
-		    Log ("Transponder: %s", g_Transponder);
-#endif
-		    /* Set flag to notify new transponder ID */
-		    l_flgNewID = true;
-		}
-		/* no break */
 	    default:
 		l_State[devNum] = 0;	// restart state machine
 		break;
@@ -730,6 +716,39 @@ int	 i;
 	default:		// unknown RFID reader type
 	    l_State[devNum] = 0;	// restart state machine
 	    break;
+    }
+    
+    /* see if a transponder ID has been received */
+    if (flgRecvdID)
+    {
+        l_State[devNum] = 0;		// restart state machine
+
+	for (i=0; i < 8; i++)	// copy w and convert to ASCII HEX
+	{
+	    newTransponder[2*i]	  = HexChar[(w[devNum][offs-i]>>4) & 0x0F];
+	    newTransponder[2*i+1] = HexChar[(w[devNum][offs-i]) & 0x0F];
+	}
+	newTransponder[16] = '\0';
+
+	/* (re-)start timer for RFID timeout detection */
+	if (l_flgObjectPresent  &&  l_hdlRFID_DetectTimeout != NONE)
+	   sTimerStart (l_hdlRFID_DetectTimeout, g_RFID_DetectTimeout);
+
+	/* see if a new run - or Transponder Number has changed */
+	if (l_flgNewRun  ||  strcmp (newTransponder, g_Transponder))
+	{
+	    l_flgNewRun = false;	// clear flag
+
+	    /* store new Transponder Number */
+	    strcpy (g_Transponder, newTransponder);
+
+#if defined(LOGGING)  &&  ! defined (MOD_CONTROL_EXISTS)
+	    /* Generate Log Message */
+	    Log ("Transponder: %s", g_Transponder);
+#endif
+	    /* Set flag to notify new transponder ID */
+	    l_flgNewID = true;
+	}
     }
 }
 

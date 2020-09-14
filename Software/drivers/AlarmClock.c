@@ -2,7 +2,7 @@
  * @file
  * @brief	Alarm Clock Module
  * @author	Ralf Gerhauser
- * @version	2018-11-13
+ * @version	2020-05-12
  *
  * This module implements an Alarm Clock.  It uses the Real Time Counter (RTC)
  * for this purpose.  The main features are:
@@ -32,8 +32,12 @@
  *
  ****************************************************************************//*
 Revision History:
-2018-11-13,rage	- RTC_IRQHandler: First handle alarm times, then the timers.
-		- sTimerStart: count seconds + 1 to ensure a minimum of 1s.
+2020-06-20,rage	CheckAlarmTimes: Also consider to switch off power outputs.
+2020-05-12,rage	Implemented CheckAlarmTimes() to call the respective alarm
+		action if the current time matches the alarm time.
+2018-10-10,rage	RTC_IRQHandler: First handle alarm times, then the timers,
+		otherwise IntervalPowerControl() may switch a power output on
+		and AlarmPowerControl() off again some milliseconds later.
 2018-03-24,rage	Set interrupt priority for RTC_IRQn.
 		Simplified msDelay(), added msDelayStart() and msDelayIsDone().
 		Removed INT locking in ClockUpdate().
@@ -286,6 +290,92 @@ int		i;			// index variable
 
 /***************************************************************************//**
  *
+ * @brief	Check Alarm Times if actions are required
+ *
+ * This routine checks ON_TIME_1~5 and OFF_TIME_1~5 if the current time
+ * satisfies to turn devices on or off.  It must be called <b>after</b> a new
+ * configuration has been loaded and all initialization routines have been
+ * executed.
+ *
+ * @note
+ * The initial state for all alarm times is OFF.  This is true after booting,
+ * and also when a configuration file is read, see ClearConfiguration().
+ *
+ ******************************************************************************/
+void	CheckAlarmTimes (void)
+{
+int	i, alarm_on, alarm_off;
+int	time, on_time, off_time;	// time in minutes
+int8_t	on_hour, on_min, off_hour, off_min;
+
+    /* Initial DCF77 time synchronisation is required */
+    if (g_PowerUpTime == 0)
+	return;		// no valid time set yet, abort
+
+    /* Get current time */
+    time = g_CurrDateTime.tm_hour * 60 + g_CurrDateTime.tm_min;
+#ifdef LOGGING
+    Log ("Checking alarm times against current time %02d:%02d",
+	 g_CurrDateTime.tm_hour, g_CurrDateTime.tm_min);
+#endif
+
+    /* Check all power-related alarms */
+    for (i = 0;  i < NUM_POWER_ALARMS;  i++)
+    {
+	alarm_on  = (int)ALARM_ON_TIME  + i;
+	alarm_off = (int)ALARM_OFF_TIME + i;
+
+	if (AlarmIsEnabled(alarm_on) == false)
+	    continue;		// skip alarms which are disabled
+
+	/* Be sure functions have been defined */
+	if ((l_Alarm[alarm_on].Function == NULL)
+	||  (l_Alarm[alarm_off].Function == NULL))
+	    continue;		// skip these alarms
+
+	/* Get alarm times */
+	AlarmGet(alarm_on, &on_hour,  &on_min);
+	on_time = on_hour * 60 + on_min;
+	AlarmGet(alarm_off, &off_hour, &off_min);
+	off_time = off_hour * 60 + off_min;
+
+	/*
+	 * Consider the case where on-time seems to be later than off-time,
+	 * e.g. 23:15 to 01:30.  Let off-time end 24h later in this case.
+	 */
+	if (off_time < on_time)
+	{
+	    off_time += (24 * 60);	// 24h wrap around
+
+	    /* This also applies to the current time */
+	    if (time < on_time)
+		time += (24 * 60);
+	}
+
+	/* See if current time is between on- and off-time */
+	if (on_time <= time  &&  time < off_time)
+	{
+	    /* Yes, alarm is currently active */
+#ifdef LOGGING
+	    Log ("- Alarm %d (%02d:%02d - %02d:%02d) is ON",
+		 i+1, on_hour, on_min, off_hour, off_min);
+#endif
+	    l_Alarm[alarm_on].Function (alarm_on);
+	}
+	else
+	{
+	    /* No, alarm is currently inactive */
+#ifdef LOGGING
+	    Log ("- Alarm %d (%02d:%02d - %02d:%02d) is off",
+		 i+1, on_hour, on_min, off_hour, off_min);
+#endif
+	    l_Alarm[alarm_off].Function (alarm_off);
+	}
+    } // for (i = 0;  i < NUM_POWER_ALARMS;  i++)
+}
+
+/***************************************************************************//**
+ *
  * @brief	Specify an Alarm Action
  *
  * Specify a function that should be called when the alarm time is reached.
@@ -310,6 +400,27 @@ void	AlarmAction (int alarmNum, ALARM_FCT function)
 
     /* Set function pointer */
     l_Alarm[alarmNum].Function = function;
+}
+
+/***************************************************************************//**
+ *
+ * @brief	Execute an Alarm Action
+ *
+ * Execute the function of the specified alarm.
+ *
+ * @param[in] alarmNum
+ *	Number of the alarm to execute the action for.  This parameter can be
+ *	any integer value between 0 and (MAX_ALARMS - 1).
+ *
+ ******************************************************************************/
+void	ExecuteAlarmAction (int alarmNum)
+{
+    /* Parameter check */
+    EFM_ASSERT(0 <= alarmNum  &&  alarmNum < MAX_ALARMS);
+
+    /* Execute function if one has been defined */
+    if (l_Alarm[alarmNum].Function)
+	l_Alarm[alarmNum].Function (alarmNum);
 }
 
 /***************************************************************************//**
@@ -951,6 +1062,8 @@ uint32_t  rtcCNT;	// save state of the RTC Interrupt Enable register
 #ifdef LOGGING
 	Log ("Initial Time Synchronisation");
 #endif
+	/* Now we've got a valid time, check power alarms */
+	CheckAlarmTimes();
     }
 
     /* Be sure to disable RTC interrupts while manipulating registers */

@@ -664,6 +664,9 @@ ID_PARM	*pID;
 	drvLEUART_puts ("No Configuration Data loaded\n");
 	return;
     }
+    
+    drvLEUART_puts ("All times are displayed for timezone ");
+    drvLEUART_puts (g_isdst ? "MESZ\n":"MEZ\n");
 
     /* log all values read from configuration file */
     for (i = 0;  l_pCfgVarList[i].name != NULL;  i++)

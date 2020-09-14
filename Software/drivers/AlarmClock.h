@@ -2,11 +2,13 @@
  * @file
  * @brief	Header file of module AlarmClock.c
  * @author	Ralf Gerhauser
- * @version	2018-10-09
+ * @version	2020-05-12
  ****************************************************************************//*
 Revision History:
+2020-05-12,rage	Added prototypes for CheckAlarmTimes() and ExecuteAlarmAction().
 2018-10-09,rage	Reduced size of type TIM_HDL from 4 to 1 byte to save memory.
-2018-03-24,rage	Added prototypes for msDelayStart() and msDelayIsDone().
+2018-03-24,rage	Increased MAX_SEC_TIMERS from 10 to 16..
+		Added prototypes for msDelayStart() and msDelayIsDone().
 2016-09-14,rage	Added prototype for ClockGetMilliSec().
 2016-04-05,rage	Made variable <g_isdst> of type "volatile".
 		Added variable <g_PowerUpTime>.
@@ -32,7 +34,7 @@ Revision History:
 
 #ifndef MAX_SEC_TIMERS
     /*!@brief Maximum number of sTimer entries */
-    #define MAX_SEC_TIMERS	10
+    #define MAX_SEC_TIMERS	16
 #endif
 
 #ifndef MAX_ALARMS
@@ -111,7 +113,9 @@ extern volatile time_t	g_PowerUpTime;	//!< Power-Up Time as UNIX time
 void	AlarmClockInit (void);
 
     /* Alarm handling functions */
+void	CheckAlarmTimes (void);
 void	AlarmAction (int alarmNum, ALARM_FCT function);
+void	ExecuteAlarmAction (int alarmNum);
 void	AlarmSet    (int alarmNum, int8_t hour, int8_t min);
 void	AlarmGet    (int alarmNum, int8_t *pHourVar, int8_t *pMinVar);
 bool	AlarmIsEnabled (int alarmNum);
