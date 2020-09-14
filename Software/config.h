@@ -232,6 +232,15 @@ typedef enum
     NUM_ALARM_IDS
 } ALARM_ID;
 
+/*
+ * !@brief These defines hold the first and last alarm time ENUM for Power
+ * Output control, and the number of alarm ON, resp. OFF times.
+ */
+//@{
+#define FIRST_POWER_ALARM	ALARM_ON_TIME
+#define LAST_POWER_ALARM	ALARM_OFF_TIME
+#define NUM_POWER_ALARMS	(LAST_POWER_ALARM - ALARM_OFF_TIME + 1)
+//@}
 
 /*!@brief Enumeration of the EM1 Modules
  *

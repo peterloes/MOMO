@@ -1,4 +1,4 @@
-# Configuration file for MAPRDL COPY FILE ON SD CARD
+# Configuration file for MAPRDL
 #
 # Revision History
 # 2017-01-22,rage   Initial version
@@ -57,26 +57,30 @@
 #   but its ID is not listed in this file.  "UNKNOWN" means that NO transponder
 #   could be detected within RFID_DETECT_TIMEOUT.
 
-    # Operating time of the feeder
-ON_TIME	 = 03:35
-OFF_TIME = 22:40
+    # Operating time of the feeder MEZ (MESZ-1)
+ON_TIME	 = 10:02
+OFF_TIME = 22:00
 
     # Light barrier filter
-LB_FILTER_DURATION   = 10
+LB_FILTER_DURATION   = 0
 
     # RFID settings
-RFID_PWR_OFF_TIMEOUT = 360	# 6min
-RFID_DETECT_TIMEOUT  = 15
+RFID_PWR_OFF_TIMEOUT = 360 # 6min
+RFID_DETECT_TIMEOUT  = 20
 
     # Shutter open and closed durations (default)
-KEEP_OPEN   = 60
-KEEP_CLOSED = 120
+KEEP_OPEN   = 10
+KEEP_CLOSED = 0
 
     # Camera settings (default)
-CAM1_DURATION = 15		# keep CAM1 on for 15s after LB is inactive
+CAM_DURATION = 15		# keep CAM on for 15s after LB is inactive
 
     # ID-specific configurations
-ID = 108196A801AF0001:180	# keep feeder 3min open
+
+ID = 108196A801AF0001:180       # keep feeder 3min open
+
 ID = 9E1CE7D001AF0001:A		# keep feeder always open
+
 ID = ANY:120:240:360		# for any other ID keep feeder 2min open, 4min closed
+
 ID = UNKNOWN:0:600		# close feeder immediately for unknown fellows, keep 10min closed

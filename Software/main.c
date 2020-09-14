@@ -60,6 +60,8 @@
  *
  ****************************************************************************//*
 Revision History:
+2020-05-12,rage	Version 1.4:
+                - Call CheckAlarmTimes() after CONFIG.TXT has been read.
 2018-11-13,rage Version 1.3:
 		- Moved DMA related variables to module "DMA_ControlBlock.c".
 		- Report available memory (debug version only).
@@ -605,6 +607,10 @@ int main( void )
 	/* Check for power-fail */
 	if (! PowerFailCheck())
 	{
+#if ENABLE_LEUART_RECEIVER
+	    /* Check for command from Debug Console */
+	    CheckCommand();
+#endif
 	    /* Check if to power-on or off the RFID reader */
 	    RFID_Check();
 
@@ -638,6 +644,9 @@ int main( void )
 
 		/* Flush log buffer again and switch SD-Card power off */
 		LogFlush(false);
+                
+                /* See if devices must be switched on at this time */
+		CheckAlarmTimes();
 
 #ifdef DEBUG
 		MemInfo();	// report available memory
