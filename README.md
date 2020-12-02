@@ -28,7 +28,7 @@ as well as in laboratory settings
 
 ![My image](https://github.com/peterloes/MOMO/blob/master/Getting_Started_Tutorial/1_Feeder.jpg)
 
-Bird Feeder Application
+Bird Feeder Application:
 
 https://github.com/peterloes/MOMO/blob/master/Getting_Started_Tutorial/1_poster_overview_3.pdf
 
