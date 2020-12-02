@@ -28,7 +28,7 @@ as well as in laboratory settings
 
 ![My image](https://github.com/peterloes/MOMO/blob/master/Getting_Started_Tutorial/1_Feeder.jpg)
 
-Bird Feeder
+Bird Feeder Application
 
 https://github.com/peterloes/MOMO/blob/master/Getting_Started_Tutorial/1_poster_overview_3.pdf
 
@@ -50,6 +50,12 @@ https://github.com/peterloes/Linear_Engine
 
 https://github.com/peterloes/Booter_RFID-MS_MOMO_TAMDL
 
+Manufacture:
+
+https://github.com/peterloes/MOMO/blob/master/Getting_Started_Tutorial/5_Supplier.txt
+
+EXTENSIONS
+
 Application Scales: Outdoor weighing system for Animals include RFID-Reader
 
 https://github.com/peterloes/Scales
@@ -57,8 +63,3 @@ https://github.com/peterloes/Scales
 Application Audio: Record and Playback Soundfiles triggered by (RFID) pit-tag numbers
 
 https://github.com/peterloes/Audio
-
-
-Manufacture:
-
-https://github.com/peterloes/MOMO/blob/master/Getting_Started_Tutorial/5_Supplier.txt
