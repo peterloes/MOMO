@@ -1,5 +1,5 @@
 ﻿# Multifunctional Mainboard to Observe and Manipulate Organisms (MOMO)
-[\[paper\]](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2656.13160)
+[\[paper\]](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2656.13160) 2.3 Nest and feeder monitoring system
 
 Authors: Loës P., Skripsky P., Kempenaers B. (2019) [![DOI](https://zenodo.org/badge/210341799.svg)](https://zenodo.org/badge/latestdoi/210341799)
 
