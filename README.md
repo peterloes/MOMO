@@ -58,11 +58,11 @@ https://github.com/peterloes/MOMO/blob/master/Getting_Started_Tutorial/5_Supplie
 
 EXTENSIONS
 
-Application Scales: Outdoor weighing system for Animals include RFID-Reader
+Application Scales: Outdoor weighing system for animals include RFID-reader
 
 https://github.com/peterloes/Scales
 
-Application Audio: Record and Playback Soundfiles triggered by (RFID) pit-tag numbers
+Application Audio: Record and playback soundfiles triggered by (RFID) pit-tag numbers
 
 https://github.com/peterloes/Audio
 
