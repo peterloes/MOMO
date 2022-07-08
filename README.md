@@ -1,12 +1,12 @@
-﻿# Multifunctional Mainboard to Observe and Manipulate Organisms (MOMO)
+﻿# Multifunctional mainboard to observe and manipulate organisms (MOMO)
 [\[paper\]](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/1365-2656.13160) 2.3 Nest and feeder monitoring system
 
 Authors: Loës P., Skripsky P., Kempenaers B. (2019) [![DOI](https://zenodo.org/badge/210341799.svg)](https://zenodo.org/badge/latestdoi/210341799)
 
-Platform for Animal Observation and Manipulation 
+Platform for animal observation and manipulation. 
 
 An efficient system to monitor and control animal behaviour in wildlife
-as well as in laboratory settings
+as well as in laboratory settings.
 
 - Targeted manipulation of 1000 and more individuals
 - Supports a broad range of technical applications like e.g. traps, gates, feeders, lights, cameras
