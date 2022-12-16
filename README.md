@@ -22,7 +22,7 @@ as well as in laboratory settings.
 - Application Current Control twice a day
 - Forecast for Battery-Change implemented
 - Energy Bypass so that Date and Time are maintained even when changing battery
-- Hyperterminal Output to get real-time data in the field
+- Hyperterminal Output to get real-time data to the computer/laptop
 - Low-Power Device:sleep: 220µA@12V with Light_Barrier awake: 12mA@12V
 
 
