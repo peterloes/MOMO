@@ -8,7 +8,7 @@ Platform for animal observation and manipulation.
 An efficient system to monitor and control animal behaviour in wildlife
 as well as in laboratory settings.
 
-- Targeted manipulation of 1000 and more individuals
+- Targeted manipulation of 1000 and more individuals. Selective birdfeeder.
 - Supports a broad range of technical applications like e.g. traps, gates, feeders, lights, cameras
 -	Compatible with different RFID systems and triggers
 -	Low power consumption and specific data collection lead to long lasting collection periods
